@@ -1,8 +1,11 @@
+require("dotenv").config();
+
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const path = require("path");
+
 
 const app = express();
 app.use(cors());
@@ -12,10 +15,10 @@ app.use(express.json());
    MYSQL CONNECTION
 ========================= */
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",          // your MySQL password
-  database: "foodieflow" // your database name
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 });
 
 db.connect((err) => {
@@ -639,7 +642,7 @@ app.delete("/reviews/:id", (req, res) => {
 /* =========================
    SERVER START
 ========================= */
-const PORT = 5000; // fixed to 5000 for consistency
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅ Backend running on http://localhost:${PORT}`);
 });
