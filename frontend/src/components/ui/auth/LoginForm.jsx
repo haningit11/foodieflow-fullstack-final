@@ -1,0 +1,89 @@
+import React, { useState } from 'react';
+import { useAuth } from '../../../context/AuthContext';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { FaUser, FaLock } from 'react-icons/fa';
+
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const success = await login(username, password);
+
+    if (success) {
+      toast.success('Welcome back!');
+      navigate(from, { replace: true });
+    } else {
+      toast.error('Invalid credentials! Please try again.');
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-foodie-background py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
+        <div className="text-center">
+          <h2 className="mt-6 text-3xl font-extrabold text-foodie-text">
+            Welcome Back
+          </h2>
+          <p className="mt-2 text-sm text-gray-600">
+            Sign in to access your foodie account
+          </p>
+        </div>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="space-y-4">
+            <div className="relative">
+              <FaUser className="absolute inset-y-0 left-0 pl-3 h-5 w-5 text-gray-400 pointer-events-none" />
+              <input
+                id="username"
+                type="text"
+                required
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="appearance-none rounded-lg block w-full px-3 py-3 pl-10 border border-gray-300 text-gray-900 focus:outline-none focus:ring-foodie-primary focus:border-foodie-primary sm:text-sm"
+              />
+            </div>
+            <div className="relative">
+              <FaLock className="absolute inset-y-0 left-0 pl-3 h-5 w-5 text-gray-400 pointer-events-none" />
+              <input
+                id="password"
+                type="password"
+                required
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="appearance-none rounded-lg block w-full px-3 py-3 pl-10 border border-gray-300 text-gray-900 focus:outline-none focus:ring-foodie-primary focus:border-foodie-primary sm:text-sm"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 px-4 rounded-lg text-white bg-foodie-primary hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foodie-primary"
+          >
+            Sign in
+          </button>
+
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{' '}
+              <Link to="/signup" className="font-medium text-foodie-primary hover:text-orange-600">
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default LoginForm;

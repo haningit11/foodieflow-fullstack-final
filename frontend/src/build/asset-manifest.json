@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/foodie-flow-restaurant-ordering/static/css/main.0b093341.css",
+    "main.js": "/foodie-flow-restaurant-ordering/static/js/main.d535c7a6.js",
+    "static/js/453.0e7eca22.chunk.js": "/foodie-flow-restaurant-ordering/static/js/453.0e7eca22.chunk.js",
+    "static/media/salmonroll.jpg": "/foodie-flow-restaurant-ordering/static/media/salmonroll.13cab655af190c90671d.jpg",
+    "static/media/quesadilla.jpg": "/foodie-flow-restaurant-ordering/static/media/quesadilla.efbdfcdb3b1088acd9cc.jpg",
+    "static/media/sausagepizza.jpg": "/foodie-flow-restaurant-ordering/static/media/sausagepizza.763733e3df4b8562fc33.jpg",
+    "static/media/donuts.jpg": "/foodie-flow-restaurant-ordering/static/media/donuts.8b89673f324e33f86c47.jpg",
+    "static/media/fishsoup.jpg": "/foodie-flow-restaurant-ordering/static/media/fishsoup.f71e6848de2972cf6fa7.jpg",
+    "static/media/oreocup.jpg": "/foodie-flow-restaurant-ordering/static/media/oreocup.e5a5de2471e88e1a5cf7.jpg",
+    "static/media/burgerfries.jpg": "/foodie-flow-restaurant-ordering/static/media/burgerfries.26fa323e07826b86e403.jpg",
+    "static/media/friedfish.jpg": "/foodie-flow-restaurant-ordering/static/media/friedfish.72eb04383a30d1880fad.jpg",
+    "static/media/sushiplatter.jpg": "/foodie-flow-restaurant-ordering/static/media/sushiplatter.e86a3580feb1db112d15.jpg",
+    "static/media/meat.jpg": "/foodie-flow-restaurant-ordering/static/media/meat.a0d04819cd742c12bff2.jpg",
+    "static/media/chicken-veg.jpg": "/foodie-flow-restaurant-ordering/static/media/chicken-veg.ee6a80b6671913baebb1.jpg",
+    "static/media/pizza.jpg": "/foodie-flow-restaurant-ordering/static/media/pizza.a6aa47d069833175d048.jpg",
+    "static/media/pasta.jpg": "/foodie-flow-restaurant-ordering/static/media/pasta.ebf99a2658d92703bad2.jpg",
+    "static/media/sarah.jpg": "/foodie-flow-restaurant-ordering/static/media/sarah.841bdd80d8d913a494ab.jpg",
+    "static/media/ramen.jpg": "/foodie-flow-restaurant-ordering/static/media/ramen.79f9c8d9f227bf3fe110.jpg",
+    "static/media/pizzawithsauce.jpg": "/foodie-flow-restaurant-ordering/static/media/pizzawithsauce.1758db810c354a4ef61e.jpg",
+    "static/media/tofusaladcheese.jpg": "/foodie-flow-restaurant-ordering/static/media/tofusaladcheese.9cb63b1181e6b62ef3e4.jpg",
+    "static/media/greeksalad.jpg": "/foodie-flow-restaurant-ordering/static/media/greeksalad.817ff9a99d824d47bef7.jpg",
+    "static/media/avosalad.jpg": "/foodie-flow-restaurant-ordering/static/media/avosalad.1ef41962f143567f304d.jpg",
+    "static/media/wrap.jpg": "/foodie-flow-restaurant-ordering/static/media/wrap.c263ebe4f22b362066f3.jpg",
+    "index.html": "/foodie-flow-restaurant-ordering/index.html",
+    "main.0b093341.css.map": "/foodie-flow-restaurant-ordering/static/css/main.0b093341.css.map",
+    "main.d535c7a6.js.map": "/foodie-flow-restaurant-ordering/static/js/main.d535c7a6.js.map",
+    "453.0e7eca22.chunk.js.map": "/foodie-flow-restaurant-ordering/static/js/453.0e7eca22.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0b093341.css",
+    "static/js/main.d535c7a6.js"
+  ]
+}
