@@ -37,11 +37,13 @@ export const CartProvider = ({ children }) => {
     };
   }, []);
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const sync = async () => {
       if (user?.id) {
         try {
-          const { data } = await axios.get(`http://localhost:5000/cart/${user.id}`);
+          const { data } = await axios.get(`${API_URL}/cart/${user.id}`);
           const rows = Array.isArray(data) ? data : [];
           const next = rows.map((r) => ({
             id: r.menu_id,
@@ -74,7 +76,7 @@ export const CartProvider = ({ children }) => {
     toast.success(`${item.name} added to cart!`);
     if (user?.id) {
       axios
-        .post(`http://localhost:5000/cart/${user.id}`, { menu_id: item.id, quantity: 1 })
+        .post(`${API_URL}/cart/${user.id}`, { menu_id: item.id, quantity: 1 })
         .catch(() => {});
     }
   };
@@ -86,7 +88,7 @@ export const CartProvider = ({ children }) => {
       return updated;
     });
     if (user?.id) {
-      axios.delete(`http://localhost:5000/cart/${user.id}/item/${itemId}`).catch(() => {});
+      axios.delete(`${API_URL}/cart/${user.id}/item/${itemId}`).catch(() => {});
     }
   };
 

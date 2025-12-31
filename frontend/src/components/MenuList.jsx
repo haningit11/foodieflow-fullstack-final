@@ -15,10 +15,12 @@ const MenuList = ({ ids, limit, showFilters = true }) => {
   const { user } = useAuth();
   const { addToCart } = useCart();
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/menu");
+        const { data } = await axios.get(`${API_URL}/menu`);
         setMenuItems(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Error fetching menu:", err);
@@ -44,7 +46,7 @@ const MenuList = ({ ids, limit, showFilters = true }) => {
     const loadFavorites = async () => {
       if (!user?.id) return;
       try {
-        const { data } = await axios.get(`http://localhost:5000/favorites/${user.id}`);
+        const { data } = await axios.get(`${API_URL}/favorites/${user.id}`);
         setFavorites((data || []).map((f) => f.menu_id));
       } catch (e) {
         console.error("Favorites load error:", e);
@@ -87,12 +89,12 @@ const MenuList = ({ ids, limit, showFilters = true }) => {
     const persist = async () => {
       try {
         if (isFav) {
-          await axios.delete("http://localhost:5000/favorites", {
+          await axios.delete(`${API_URL}/favorites`, {
             data: { user_id: user.id, menu_id: itemId },
           });
           toast.success("Removed from favorites");
         } else {
-          await axios.post("http://localhost:5000/favorites", {
+          await axios.post(`${API_URL}/favorites`, {
             user_id: user.id,
             menu_id: itemId,
           });

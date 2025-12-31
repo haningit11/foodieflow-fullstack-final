@@ -32,15 +32,18 @@ const Order = () => {
     const guestToken = localStorage.getItem('foodieflow_guest_token');
     const current = cart.find((i) => i.id === itemId);
     const nextQty = (current?.quantity || 0) + change;
+
+    const API_URL = process.env.REACT_APP_API_URL;
+
     if (user?.id) {
-      const url = `http://localhost:5000/cart/${user.id}/item/${itemId}`;
+      const url = `${API_URL}/cart/${user.id}/item/${itemId}`;
       if (nextQty <= 0) {
         axios.delete(url).catch(() => {});
       } else {
         axios.put(url, { quantity: nextQty }).catch(() => {});
       }
     } else if (guestToken) {
-      const url = `http://localhost:5000/cart/guest/${guestToken}/item/${itemId}`;
+      const url = `${API_URL}/cart/guest/${guestToken}/item/${itemId}`;
       if (nextQty <= 0) {
         axios.delete(url).catch(() => {});
       } else {
@@ -69,7 +72,7 @@ const Order = () => {
       return;
     }
     try {
-      const { data } = await axios.post('http://localhost:5000/orders', {
+      const { data } = await axios.post(`${API_URL}/orders`, {
         user_id: user.id,
         status: 'pending',
         payment_method: paymentMethod,
@@ -80,14 +83,14 @@ const Order = () => {
         return;
       }
       for (const item of cart) {
-        await axios.post('http://localhost:5000/order_items', {
+        await axios.post(`${API_URL}/order_items`, {
           order_id: orderId,
           menu_id: item.id,
           quantity: item.quantity,
           price: item.price ?? 0,
         });
       }
-      await axios.delete(`http://localhost:5000/cart/${user.id}`);
+      await axios.delete(`${API_URL}/cart/${user.id}`);
       setCart([]);
       toast.success('Order placed successfully');
       navigate('/orders');

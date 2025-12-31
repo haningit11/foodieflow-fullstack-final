@@ -12,6 +12,8 @@ const OrderHistory = () => {
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState({});
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const loadOrders = async () => {
       if (!user?.id) {
@@ -19,7 +21,7 @@ const OrderHistory = () => {
         return;
       }
       try {
-        const { data } = await axios.get(`http://localhost:5000/orders/${user.id}`);
+        const { data } = await axios.get(`${API_URL}/orders/${user.id}`);
         setOrders(Array.isArray(data) ? data : []);
       } catch (e) {
         console.error('Order history load error:', e);
@@ -34,7 +36,7 @@ const OrderHistory = () => {
     if (!user?.id) return;
     const interval = setInterval(async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/orders/${user.id}`);
+        const { data } = await axios.get(`${API_URL}/orders/${user.id}`);
         setOrders(Array.isArray(data) ? data : []);
       } catch {}
     }, 10000);

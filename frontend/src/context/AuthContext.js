@@ -5,6 +5,9 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     try {
       const saved = localStorage.getItem("foodieflow_user");
@@ -17,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const { data } = await axios.post("http://localhost:5000/login", {
+      const { data } = await axios.post(`${API_URL}/login`, {
         username,
         password,
       });
@@ -34,8 +37,8 @@ export const AuthProvider = ({ children }) => {
       } catch {}
       try {
         const [userCartRes, favoritesRes] = await Promise.all([
-          axios.get(`http://localhost:5000/cart/${loggedInUser.id}`),
-          axios.get(`http://localhost:5000/favorites/${loggedInUser.id}`),
+          axios.get(`${API_URL}/cart/${loggedInUser.id}`),
+          axios.get(`${API_URL}/favorites/${loggedInUser.id}`),
         ]);
         const cartRows = userCartRes.data || [];
         const cartItems = cartRows.map((r) => ({
@@ -61,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (username, email, password) => {
     try {
-      const { status } = await axios.post("http://localhost:5000/signup", {
+      const { status } = await axios.post(`${API_URL}/signup`, {
         username,
         email,
         password,

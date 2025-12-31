@@ -26,10 +26,12 @@ const Home = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '', menuId: '' });
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const loadMenu = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/menu');
+        const { data } = await axios.get(`${API_URL}/menu`);
         setMenuItems(Array.isArray(data) ? data : []);
       } catch (e) {
         console.error('Menu load error:', e);
@@ -57,7 +59,7 @@ const Home = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/reviews', {
+      await axios.post(`${API_URL}/reviews`, {
         user_id: user.id,
         menu_id: reviewForm.menuId,
         rating: reviewForm.rating,

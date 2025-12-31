@@ -12,6 +12,8 @@ const Favorites = () => {
   const { user } = useAuth();
   const [favorites, setFavorites] = useState([]);
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const handleReloadFavorites = (e) => {
       const ids = Array.isArray(e.detail) ? e.detail : [];
@@ -25,7 +27,7 @@ const Favorites = () => {
     const loadFavorites = async () => {
       if (!user?.id) return;
       try {
-        const { data } = await axios.get(`http://localhost:5000/favorites/${user.id}`);
+        const { data } = await axios.get(`${API_URL}/favorites/${user.id}`);
         setFavorites((data || []).map((f) => f.menu_id));
       } catch (e) {
         console.error('Favorites load error:', e);
