@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from '../components/ui/Card';
 import { FaAward, FaHeart, FaLeaf, FaUsers, FaStar, FaUtensils } from 'react-icons/fa';
 
 const About = () => {

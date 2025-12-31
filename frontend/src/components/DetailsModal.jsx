@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import Button from './ui/Button';
 import { useAuth } from '../context/AuthContext';
 
@@ -12,6 +12,8 @@ const DetailsModal = ({ item, onClose, onAddToCart }) => {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
+
+  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -50,7 +52,7 @@ const DetailsModal = ({ item, onClose, onAddToCart }) => {
     const loadReviews = async () => {
       if (!item?.id) return;
       try {
-        const { data } = await axios.get(`http://localhost:5000/reviews/${item.id}`);
+        const { data } = await axios.get(`${API_URL}/reviews/${item.id}`);
         setReviews(Array.isArray(data) ? data : []);
       } catch (e) {
         console.error('Reviews load error', e);
@@ -65,7 +67,7 @@ const DetailsModal = ({ item, onClose, onAddToCart }) => {
       return;
     }
     try {
-      const { data: orders } = await axios.get(`http://localhost:5000/orders/${user.id}`);
+      const { data: orders } = await axios.get(`${API_URL}/orders/${user.id}`);
       const hasOrdered = (orders || []).some((o) =>
         Array.isArray(o.items) && o.items.some((it) => it.menu_id === item.id)
       );
@@ -73,14 +75,14 @@ const DetailsModal = ({ item, onClose, onAddToCart }) => {
         toast.error('You can only review items you have ordered.');
         return;
       }
-      await axios.post('http://localhost:5000/reviews', {
+      await axios.post(`${API_URL}/reviews`, {
         user_id: user.id,
         menu_id: item.id,
         rating,
         comment,
       });
       setComment('');
-      const { data } = await axios.get(`http://localhost:5000/reviews/${item.id}`);
+      const { data } = await axios.get(`${API_URL}/reviews/${item.id}`);
       setReviews(Array.isArray(data) ? data : []);
       toast.success('Review added');
     } catch (e) {
