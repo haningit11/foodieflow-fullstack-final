@@ -15,6 +15,9 @@ const Order = () => {
   const [phone, setPhone] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
 
+  
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const updateQuantity = (itemId, change) => {
     setCart((prevCart) => {
       const next = prevCart
@@ -32,8 +35,6 @@ const Order = () => {
     const guestToken = localStorage.getItem('foodieflow_guest_token');
     const current = cart.find((i) => i.id === itemId);
     const nextQty = (current?.quantity || 0) + change;
-
-    const API_URL = process.env.REACT_APP_API_URL;
 
     if (user?.id) {
       const url = `${API_URL}/cart/${user.id}/item/${itemId}`;
