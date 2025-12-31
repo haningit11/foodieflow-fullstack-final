@@ -28,28 +28,30 @@ const Dashboard = () => {
     { id: 'reviews', label: 'Reviews' },
   ];
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/users');
+        const { data } = await axios.get(`${API_URL}/users`);
         setUsers(Array.isArray(data) ? data : []);
       } catch {}
     };
     const loadOrders = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/orders');
+        const { data } = await axios.get(`${API_URL}/orders`);
         setOrders(Array.isArray(data) ? data : []);
       } catch {}
     };
     const loadMenu = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/menu');
+        const { data } = await axios.get(`${API_URL}/menu`);
         setMenu(Array.isArray(data) ? data : []);
       } catch {}
     };
     const loadReviews = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/reviews');
+        const { data } = await axios.get(`${API_URL}/reviews`);
         setReviews(Array.isArray(data) ? data : []);
       } catch {}
     };
@@ -61,21 +63,21 @@ const Dashboard = () => {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/users/${id}`);
+      await axios.delete(`${API_URL}/users/${id}`);
       setUsers((prev) => prev.filter((u) => u.id !== id));
     } catch {}
   };
 
   const updateUserRole = async (id, role) => {
     try {
-      await axios.put(`http://localhost:5000/users/${id}/role`, { role });
+      await axios.put(`${API_URL}/users/${id}/role`, { role });
       setUsers((prev) => prev.map((u) => (u.id === id ? { ...u, role } : u)));
     } catch {}
   };
 
   const updateOrderStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/orders/${id}/status`, { status });
+      await axios.put(`${API_URL}/orders/${id}/status`, { status });
       setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
     } catch {}
   };
@@ -106,10 +108,10 @@ const Dashboard = () => {
     };
     try {
       if (editingProductId) {
-        await axios.put(`http://localhost:5000/menu/update/${editingProductId}`, payload);
+        await axios.put(`${API_URL}/menu/update/${editingProductId}`, payload);
         setMenu((prev) => prev.map((m) => (m.id === editingProductId ? { ...m, ...payload } : m)));
       } else {
-        const { data } = await axios.post('http://localhost:5000/menu/create', payload);
+        const { data } = await axios.post(`${API_URL}/menu/create`, payload);
         setMenu((prev) => [{ id: data.id, ...payload }, ...prev]);
       }
       cancelEditProduct();
@@ -118,14 +120,14 @@ const Dashboard = () => {
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/menu/delete/${id}`);
+      await axios.delete(`${API_URL}/menu/delete/${id}`);
       setMenu((prev) => prev.filter((m) => m.id !== id));
     } catch {}
   };
 
   const deleteReview = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/reviews/${id}`);
+      await axios.delete(`${API_URL}/reviews/${id}`);
       setReviews((prev) => prev.filter((r) => r.id !== id));
     } catch {}
   };
