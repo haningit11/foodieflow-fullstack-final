@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const path = require("path");
@@ -14,12 +14,9 @@ app.use(express.json());
 /* =========================
    MYSQL CONNECTION
 ========================= */
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME
-});
+
+const db = mysql.createConnection(process.env.DATABASE_URL);
+
 
 db.connect((err) => {
   if (err) {
@@ -29,7 +26,7 @@ db.connect((err) => {
   }
 });
 
-// No local image serving; menu.image must be full online URLs
+
 
 
 /* =========================
@@ -42,6 +39,16 @@ app.get("/", (req, res) => {
 /* =========================
    USERS (SIGNUP / LOGIN)
 ========================= */
+
+app.get("/test-db", (req, res) => {
+  db.query("SELECT COUNT(*) AS count FROM menu", (err, results) => {
+    if (err) {
+      console.error("Query error:", err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.json({ rows_in_menu: results[0].count });
+  });
+});
 
 // SIGNUP
 app.post("/signup", async (req, res) => {
