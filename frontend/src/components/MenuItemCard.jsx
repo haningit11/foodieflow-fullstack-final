@@ -48,9 +48,10 @@ const MenuItemCard = ({ item, onAddToCart, onToggleFavorite, onViewDetails, isFa
           <h3 className="text-xl font-bold text-gray-900 line-clamp-1" title={item.name}>
             {item.name || 'Unnamed Item'}
           </h3>
-          <span className="text-xl font-black text-foodie-primary shrink-0 ml-2">
-            ${item.price ? item.price.toFixed(2) : '0.00'}
-          </span>
+
+         <span className="text-xl font-black text-foodie-primary shrink-0 ml-2">
+           ${item.price ? Number(item.price).toFixed(2) : '0.00'}
+        </span>
         </div>
         
         <div className="flex gap-3 mt-auto">
