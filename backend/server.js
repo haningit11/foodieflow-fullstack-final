@@ -40,15 +40,6 @@ app.get("/", (req, res) => {
    USERS (SIGNUP / LOGIN)
 ========================= */
 
-app.get("/test-db", (req, res) => {
-  db.query("SELECT COUNT(*) AS count FROM menu", (err, results) => {
-    if (err) {
-      console.error("Query error:", err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json({ rows_in_menu: results[0].count });
-  });
-});
 
 // SIGNUP
 app.post("/signup", async (req, res) => {
