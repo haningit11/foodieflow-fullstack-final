@@ -59,7 +59,7 @@ const Dashboard = () => {
     loadOrders();
     loadMenu();
     loadReviews();
-  }, []);
+  }, [API_URL]);
 
   const deleteUser = async (id) => {
     try {
